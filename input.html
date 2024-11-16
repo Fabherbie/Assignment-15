@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <!-- 9. Create an input and a button in HTML.
+    Capture the input value in a function triggered on button click.
+    Make an API request using the input value, then display the result. -->
+
+    <!-- inputRequest.html -->
+<input type="text" id="userIdInput" placeholder="Enter User ID">
+<button id="fetchUser">Fetch User</button>
+<div id="userDetails"></div>
+<script>
+  document.getElementById("fetchUser").addEventListener("click", async () => {
+    const userId = document.getElementById("userIdInput").value;
+    try {
+      const response = await fetch(`https://api.example.com/users/${userId}`);
+      const user = await response.json();
+      document.getElementById("userDetails").textContent = JSON.stringify(user);
+    } catch (error) {
+      console.error("Error fetching user:", error);
+    }
+  });
+</script>
+
+
+</body>
+</html>

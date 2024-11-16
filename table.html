@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dynamic Students Table</title>
+</head>
+<body>
+
+    <!-- 6. Create a table structure in HTML.
+Fetch data using fetch().
+Loop through the data, creating rows ( tr ) and cells ( td ) dynamically, then insert into table. -->
+
+    <!-- table.html -->
+    <h2>Students Information</h2>
+    <table id="studentsTable">
+        <thead>
+            <tr style="font-size: medium;">
+                <th>Name</th>
+                <th>Course</th>
+                <th>Sex M/F</th>
+                <th>Mode</th>
+            </tr>
+        </thead>
+        <tbody>
+            <!-- Dynamically generated rows will be inserted here -->
+        </tbody>
+    </table>
+
+    <script>
+        // JavaScript to fetch data and populate the table
+        async function fetchStudentsData() {
+            try {
+                // Simulating a fetch request with sample data
+                const response = await fetch('https://api.example.com/students'); // not a real API URL, can be replaced
+                const students = await response.json();
+
+                const tableBody = document.querySelector('#studentsTable tbody');
+
+                // Loop through the data and create rows
+                students.forEach(student => {
+                    const row = document.createElement('tr');
+
+                    // Add data to each cell in the row
+                    row.innerHTML = `
+                        <td>${student.name}</td>
+                        <td>${student.course}</td>
+                        <td>${student.sex}</td>
+                        <td>${student.mode}</td>
+                    `;
+                    tableBody.appendChild(row);
+                });
+            } catch (error) {
+                console.error('Error fetching students data:', error);
+            }
+        }
+
+        // Call the function to fetch and populate the table on page load
+        fetchStudentsData();
+    </script>
+
+<script>
+    // Mock data to simulate API response
+    const mockStudentsData = [
+        { name: "Olayinka", course: "UI/UX Designer", sex: "Female", mode: "Morning" },
+        { name: "Genius", course: "Software Engineer", sex: "Male", mode: "Morning" },
+        { name: "Michael", course: "Graphic Designer", sex: "Male", mode: "Afternoon" },
+        { name: "Ifeoluwa", course: "Virtual Assistant", sex: "Female", mode: "Morning" },
+    ];
+
+    // Function to populate the table with mock data
+    function populateTable(data) {
+        const tableBody = document.querySelector('#studentsTable tbody');
+
+        // Loop through the data and create rows
+        data.forEach(student => {
+            const row = document.createElement('tr');
+
+            // Create cells and append to the row
+            row.innerHTML = `
+                <td>${student.name}</td>
+                <td>${student.course}</td>
+                <td>${student.sex}</td>
+                <td>${student.mode}</td>
+            `;
+            tableBody.appendChild(row);
+        });
+    }
+
+    // Call the function with mock data
+    populateTable(mockStudentsData);
+</script>
+  
+</body>
+</html>
+
+

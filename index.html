@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <!-- 8. Create an HTML file with a button and an empty ul element for displaying names.
+    In JavaScript, define a function to handle the button’s click event.
+    Use fetch() to get data from the API, then parse it with .json().
+    Loop through the data to create li elements, adding each name to the ul -->
+
+    <!-- fetchNames.html -->
+<button id="fetchNames">Fetch Names</button>
+<ul id="nameList"></ul>
+<script>
+  document.getElementById("fetchNames").addEventListener("click", async () => {
+    try {
+      const response = await fetch("https://api.example.com/users");
+      const users = await response.json();
+      const list = document.getElementById("nameList");
+      list.innerHTML = ""; // Clear previous entries
+      users.forEach((user) => {
+        const li = document.createElement("li");
+        li.textContent = user.name;
+        list.appendChild(li);
+      });
+    } catch (error) {
+      console.error("Error fetching names:", error);
+    }
+  });
+</script>
+
+
+</body>
+</html>
